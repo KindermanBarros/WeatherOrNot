@@ -3,7 +3,7 @@ using WeatherOrNot.Utils;
 
 namespace WeatherOrNot.UI.MainMenu
 {
-    public class MainMenuPresenter : BaseUIAnimatedUIView
+    public class MainMenuPresenter : BaseUIAnimatedView
     {
         [SerializeField] private MainMenuButtonPresenter m_startGameButton;
 

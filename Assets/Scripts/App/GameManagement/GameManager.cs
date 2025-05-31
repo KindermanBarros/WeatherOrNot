@@ -2,7 +2,7 @@ using WeatherOrNot.Utils;
 
 namespace WeatherOrNot.App.GameManagement
 {
-    public class GameManager : BaseUIAnimatedUIView
+    public class GameManager : BaseUIAnimatedView
     {
         private static GameManager m_instance { get; set; }
 

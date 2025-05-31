@@ -4,8 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace WeatherOrNot.Utils
 {
-    [RequireComponent(typeof(Collider))]
-    public abstract class AbstractButtonPresenter : MonoBehaviour, IPointerClickHandler, IPointerDownHandler,
+    public abstract class AbstractButtonPresenter : BaseUIAnimatedView, IPointerClickHandler, IPointerDownHandler,
         IPointerUpHandler
     {
         public event Action OnPress;
@@ -19,9 +18,9 @@ namespace WeatherOrNot.Utils
 
         private void EnsureCollider()
         {
-            if (GetComponent<Collider>() == null)
+            if (GetComponent<Collider2D>() == null)
             {
-                gameObject.AddComponent<BoxCollider>();
+                gameObject.AddComponent<BoxCollider2D>();
             }
         }
 

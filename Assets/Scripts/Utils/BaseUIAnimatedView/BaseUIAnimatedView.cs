@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WeatherOrNot.Utils
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public abstract class BaseUIAnimatedUIView : MonoBehaviour
+    public abstract class BaseUIAnimatedView : MonoBehaviour
     {
         [SerializeField] private float m_fadeDuration = 0.25f;
         [SerializeField] private GameObject m_rootObject;

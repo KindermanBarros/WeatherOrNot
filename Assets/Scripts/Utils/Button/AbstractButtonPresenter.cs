@@ -11,7 +11,7 @@ namespace WeatherOrNot.Utils
         public event Action OnRelease;
         public event Action OnClick;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
             EnsureCollider();
         }

@@ -1,0 +1,16 @@
+{
+    "name": "WeatherOrNot.App.PlayerManager",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1d01a6fd2f8425c49a49a09d9b5c6c3e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

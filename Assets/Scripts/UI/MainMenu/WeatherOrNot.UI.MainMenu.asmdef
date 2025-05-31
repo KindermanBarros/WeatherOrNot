@@ -1,0 +1,18 @@
+{
+  "name": "WeatherOrNot.UI.MainMenu",
+  "rootNamespace": "",
+  "references": [
+    "GUID:7830a54c9a79ebf46985c25e56f5e683",
+    "WeatherOrNot.Utils",
+    "WeatherOrNot.Events.MainMenu"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

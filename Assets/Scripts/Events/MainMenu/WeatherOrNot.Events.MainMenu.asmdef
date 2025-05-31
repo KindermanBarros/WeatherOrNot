@@ -1,0 +1,16 @@
+{
+  "name": "WeatherOrNot.Events.MainMenu",
+  "rootNamespace": "",
+  "references": [
+    "GUID:bd78dc2839f8d6647a4fc6fc53a0bcf4"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

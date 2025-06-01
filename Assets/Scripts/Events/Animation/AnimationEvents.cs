@@ -8,5 +8,4 @@
     public class StartWallSlidingEvent { }
     public class StartDeadEvent { }
     public class StartDashEvent { }
-
 }

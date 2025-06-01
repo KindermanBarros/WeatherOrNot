@@ -174,22 +174,6 @@ namespace WeatherOrNot.App.PlayerManager
         private IEnumerator PlayFootstepWithDelay()
         {
             m_canPlayFootstep = false;
-            if (m_isGrounded && isMoving) // Toca apenas se estiver no chão
-            {
-                AudioClip clipToPlay = m_footstepIndex == 0 ? m_footstepsSound1 : m_footstepsSound2;
-                if (clipToPlay != null)
-                {
-                    m_audioSource.PlayOneShot(clipToPlay);
-                }
-                m_footstepIndex = 1 - m_footstepIndex; // Alterna entre 0 e 1
-            }
-            yield return new WaitForSeconds(m_footstepInterval);
-            m_canPlayFootstep = true;
-        }
-
-        private IEnumerator PlayFootstepWithDelay()
-        {
-            m_canPlayFootstep = false;
             if (m_isGrounded && isMoving)
             {
                 AudioClip clipToPlay = m_footstepIndex == 0 ? m_footstepsSound1 : m_footstepsSound2;
@@ -273,7 +257,8 @@ namespace WeatherOrNot.App.PlayerManager
             {
                 //TODO: Play Idle Animation
             }
-            EventBus.Notify(this, new ChangeWeatherEvent(weather));
+
+            //EventBus.Notify(this, new ChangeWeatherEvent(weather));
         }
 
         private void PlayWeatherSound(AudioClip clip)
@@ -340,18 +325,17 @@ namespace WeatherOrNot.App.PlayerManager
             m_isDashing = true;
             m_dashTime = Time.time + m_dashDuration;
             m_lastDashTime = Time.time;
+
+            if (m_dashSound != null)
+            {
+                m_audioSource.PlayOneShot(m_dashSound);
+            }
         }
 
         private void TryChangeWeather(WeatherTypes weather)
         {
             EventBus.Notify(this, new ChangeWeatherEvent(weather));
         }
-
-        private void SetRain() => TryChangeWeather(WeatherTypes.Rain);
-        private void SetSnowy() => TryChangeWeather(WeatherTypes.Snow);
-        private void SetSunny() => TryChangeWeather(WeatherTypes.Clear);
-        private void SetThunderstorm() => TryChangeWeather(WeatherTypes.Thunderstorm);
-        private void SetWindy() => TryChangeWeather(WeatherTypes.Windy);
 
         private void OnCollisionStay2D(Collision2D collision)
         {

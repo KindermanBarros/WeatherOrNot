@@ -1,16 +1,14 @@
-using WeatherOrNot.Utils;
+using UnityEngine;
 
 namespace WeatherOrNot.App.GameManagement
 {
-    public class GameManager : BaseUIAnimatedView
+    public class GameManager : MonoBehaviour
     {
         private static GameManager m_instance { get; set; }
 
-        public EventBusService EventBus { get; private set; }
-
-        protected override void Awake()
+        protected void Awake()
         {
-            if (m_instance != null)
+            if (m_instance)
             {
                 Destroy(gameObject);
                 return;
@@ -18,8 +16,6 @@ namespace WeatherOrNot.App.GameManagement
 
             m_instance = this;
             DontDestroyOnLoad(gameObject);
-
-            EventBus = new EventBusService();
         }
     }
 }

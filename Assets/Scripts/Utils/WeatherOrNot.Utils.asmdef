@@ -1,7 +1,9 @@
 {
   "name": "WeatherOrNot.Utils",
   "rootNamespace": "WeatherOrNot.Utils",
-  "references": [],
+  "references": [
+    "WeatherOrNot.App.PlayerManager"
+  ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

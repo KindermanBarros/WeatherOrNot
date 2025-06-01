@@ -1,4 +1,4 @@
-﻿namespace Events.MainMenu
+﻿namespace WeatherOrNot.Events.MainMenu
 {
     public class PlayGameClickedEvent
     {

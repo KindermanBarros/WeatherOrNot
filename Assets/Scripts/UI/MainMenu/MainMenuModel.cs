@@ -1,4 +1,4 @@
-﻿using Events.MainMenu;
+﻿using WeatherOrNot.Events.MainMenu;
 using WeatherOrNot.Utils;
 
 namespace WeatherOrNot.UI.MainMenu

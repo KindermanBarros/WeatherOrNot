@@ -133,6 +133,8 @@ GameObject:
   - component: {fileID: 261796145}
   - component: {fileID: 261796141}
   - component: {fileID: 261796144}
+  - component: {fileID: 261796146}
+  - component: {fileID: 261796147}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -149,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 261796139}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.683, y: -1.79, z: 0}
+  m_LocalPosition: {x: -5.683, y: -2.37, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -313,6 +315,41 @@ MonoBehaviour:
   m_playerMovement: {fileID: 261796141}
   m_dangerTag: Danger
   m_respawnDelay: 0
+--- !u!95 &261796146
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261796139}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21e323e3a6c41f3499e586fcaa12a877, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &261796147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261796139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ac2a04cef8d1b419ed07ee40b0ce26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 261796146}
 --- !u!1 &314799065
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +419,7 @@ SpriteRenderer:
   m_Size: {x: 15.36, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &314799067
@@ -532,7 +569,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 1.110223e-16, y: -0.0000000068072525, z: 7.5575685e-25, w: 1}
-  m_LocalPosition: {x: -5.683, y: -1.79, z: -10}
+  m_LocalPosition: {x: -5.683, y: -2.37, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -943,7 +980,7 @@ Transform:
   m_GameObject: {fileID: 678582258}
   serializedVersion: 2
   m_LocalRotation: {x: 1.110223e-16, y: -0.0000000068072525, z: -3.917094e-18, w: 1}
-  m_LocalPosition: {x: -5.683, y: -1.79, z: -10}
+  m_LocalPosition: {x: -5.683, y: -2.37, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9249,7 +9286,7 @@ SpriteRenderer:
   m_Size: {x: 15.36, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &2093402702

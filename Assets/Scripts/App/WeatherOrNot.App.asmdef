@@ -1,7 +1,10 @@
 {
   "name": "WeatherOrNot.App",
   "rootNamespace": "WeatherOrNot.App",
-  "references": [],
+  "references": [
+    "GUID:5385add29356c46418aa6db879cd72a8",
+    "GUID:8e19de888fa241cd8090ff63e9adfb7e"
+  ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

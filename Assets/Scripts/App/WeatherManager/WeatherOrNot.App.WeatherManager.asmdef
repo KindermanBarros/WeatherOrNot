@@ -1,7 +1,10 @@
 {
-  "name": "WeatherOrNot.Utils",
-  "rootNamespace": "WeatherOrNot.Utils",
+  "name": "WeatherOrNot.App.WeatherManager",
+  "rootNamespace": "",
   "references": [
+    "GUID:1d01a6fd2f8425c49a49a09d9b5c6c3e",
+    "GUID:5385add29356c46418aa6db879cd72a8",
+    "GUID:8e19de888fa241cd8090ff63e9adfb7e"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

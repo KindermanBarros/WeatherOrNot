@@ -1,7 +1,8 @@
 {
-  "name": "WeatherOrNot.Utils",
-  "rootNamespace": "WeatherOrNot.Utils",
+  "name": "WeatherOrNot.Events.Weather",
+  "rootNamespace": "WeatherOrNot.Events",
   "references": [
+    "WeatherOrNot.Utils"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

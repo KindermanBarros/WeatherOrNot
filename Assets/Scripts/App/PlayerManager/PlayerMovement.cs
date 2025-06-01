@@ -1,4 +1,6 @@
 using UnityEngine;
+using WeatherOrNot.Events.Weather;
+using WeatherOrNot.Utils;
 
 namespace WeatherOrNot.App.PlayerManager
 {
@@ -64,6 +66,21 @@ namespace WeatherOrNot.App.PlayerManager
             if (Input.GetKeyDown(KeyCode.Q))
                 TryDash();
 
+            if (Input.GetKeyDown(KeyCode.Z))
+                SetSnowy();
+
+            if (Input.GetKeyDown(KeyCode.X))
+                SetSunny();
+
+            if (Input.GetKeyDown(KeyCode.C))
+                SetThunderstorm();
+
+            if (Input.GetKeyDown(KeyCode.V))
+                SetWindy();
+
+            if (Input.GetKeyDown(KeyCode.B))
+                SetRain();
+
             FlipCharacter(m_horizontalInput);
             HandleWallSlide();
             HandleJump();
@@ -82,9 +99,9 @@ namespace WeatherOrNot.App.PlayerManager
                 return;
             }
 
-            var _currentVelocity = m_rb.linearVelocity;
-            _currentVelocity.x = m_horizontalInput * m_moveSpeed;
-            m_rb.linearVelocity = new Vector2(_currentVelocity.x, m_rb.linearVelocity.y);
+            var currentVelocity = m_rb.linearVelocity;
+            currentVelocity.x = m_horizontalInput * m_moveSpeed;
+            m_rb.linearVelocity = new Vector2(currentVelocity.x, m_rb.linearVelocity.y);
 
             if (m_isWallSliding)
             {
@@ -117,24 +134,54 @@ namespace WeatherOrNot.App.PlayerManager
 
         private void HandleJump()
         {
-            var _jumpBuffered = Time.time - m_lastJumpPressedTime <= m_jumpBufferTime;
-            var _canUseCoyote = Time.time - m_lastGroundedTime <= m_coyoteTime;
+            var jumpBuffered = Time.time - m_lastJumpPressedTime <= m_jumpBufferTime;
+            var canUseCoyote = Time.time - m_lastGroundedTime <= m_coyoteTime;
 
-            if (!_jumpBuffered) return;
+            if (!jumpBuffered) return;
 
             if (m_isWallSliding)
             {
-                var _force = new Vector2(-m_wallDirection * m_wallJumpDirection.x * m_wallJumpForce,
+                var force = new Vector2(-m_wallDirection * m_wallJumpDirection.x * m_wallJumpForce,
                     m_wallJumpDirection.y * m_wallJumpForce);
                 m_rb.linearVelocity = Vector2.zero;
-                m_rb.AddForce(_force, ForceMode2D.Impulse);
+                m_rb.AddForce(force, ForceMode2D.Impulse);
                 m_lastJumpPressedTime = -1;
             }
-            else if (m_isGrounded || _canUseCoyote)
+            else if (m_isGrounded || canUseCoyote)
             {
                 m_rb.linearVelocity = new Vector2(m_rb.linearVelocity.x, m_jumpForce);
                 m_lastJumpPressedTime = -1;
             }
+        }
+
+        private void TryChangeWeather(WeatherTypes weather)
+        {
+            EventBus.Notify(this, new ChangeWeatherEvent(weather));
+        }
+
+        private void SetRain()
+        {
+            TryChangeWeather(WeatherTypes.Rain);
+        }
+
+        private void SetSnowy()
+        {
+            TryChangeWeather(WeatherTypes.Snow);
+        }
+
+        private void SetSunny()
+        {
+            TryChangeWeather(WeatherTypes.Clear);
+        }
+
+        private void SetThunderstorm()
+        {
+            TryChangeWeather(WeatherTypes.Thunderstorm);
+        }
+
+        private void SetWindy()
+        {
+            TryChangeWeather(WeatherTypes.Windy);
         }
 
         private void TryDash()
@@ -152,17 +199,17 @@ namespace WeatherOrNot.App.PlayerManager
             m_isGrounded = false;
             m_isTouchingWall = false;
 
-            foreach (var _contact in collision.contacts)
+            foreach (var contact in collision.contacts)
             {
-                if (_contact.normal.y > 0.5f)
+                if (contact.normal.y > 0.5f)
                 {
                     m_isGrounded = true;
                     m_lastGroundedTime = Time.time;
                 }
-                else if (Mathf.Abs(_contact.normal.x) > 0.5f)
+                else if (Mathf.Abs(contact.normal.x) > 0.5f)
                 {
                     m_isTouchingWall = true;
-                    m_wallDirection = _contact.normal.x > 0 ? -1 : 1;
+                    m_wallDirection = contact.normal.x > 0 ? -1 : 1;
                 }
             }
         }

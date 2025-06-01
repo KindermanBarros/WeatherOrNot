@@ -7,6 +7,7 @@ namespace WeatherOrNot.App.WeatherManager
     public class WeatherManager : MonoBehaviour
     {
         private WeatherTypes m_currentWeather;
+        [SerializeField] private WeatherVisualController m_weatherVisualController;
 
         private void Awake()
         {
@@ -25,6 +26,8 @@ namespace WeatherOrNot.App.WeatherManager
             m_currentWeather = weather;
             //TODO: Implement weather changes
             Debug.Log($"Weather changed to: {m_currentWeather}");
+            EventBus.Notify(this, new UpdateWeatherEvent(m_currentWeather));
         }
+
     }
 }

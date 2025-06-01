@@ -60,6 +60,22 @@ namespace WeatherOrNot.App.PlayerManager
             if (Time.time < 0.1f) return;
 
             HandleInput();
+            m_horizontalInput = Input.GetAxisRaw("Horizontal");
+
+            if (Input.GetButtonDown("Jump"))
+                m_lastJumpPressedTime = Time.time;
+
+            if (Input.GetKeyDown(KeyCode.Z))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Snow));
+            if (Input.GetKeyDown(KeyCode.X))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Clear));
+            if (Input.GetKeyDown(KeyCode.C))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Thunderstorm));
+            if (Input.GetKeyDown(KeyCode.V))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Windy));
+            if (Input.GetKeyDown(KeyCode.B))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Rain));
+
             FlipCharacter(m_horizontalInput);
             HandleWallSlide();
             HandleJump();

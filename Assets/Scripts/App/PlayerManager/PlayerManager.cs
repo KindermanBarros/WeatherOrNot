@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using WeatherOrNot.Events.Animation;
+using WeatherOrNot.Utils;
 
 namespace WeatherOrNot.App.PlayerManager
 {
@@ -54,6 +56,8 @@ namespace WeatherOrNot.App.PlayerManager
             }
 
             // TODO: Add Death Animation and Effects
+            EventBus.Notify(this, new StartDeadEvent());
+
 
             Invoke(nameof(RespawnPlayer), m_respawnDelay);
         }

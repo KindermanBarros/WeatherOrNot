@@ -6,14 +6,16 @@ using WeatherOrNot.Events.Weather;
 
 namespace WeatherOrNot.App.WeatherManager
 {
-    
-
     public class WeatherVisualController : MonoBehaviour
     {
         [SerializeField] private Tilemap tilemap;
 
-        [Header("Cores por clima")]
-        [SerializeField] private Color clearColor = Color.white;
+        [Header("Tilemap dos perigos")] [SerializeField]
+        private TilemapRenderer tilemapDangersRenderer;
+
+        [Header("Cores por clima")] [SerializeField]
+        private Color clearColor = Color.white;
+
         [SerializeField] private Color rainColor = new Color(0.4f, 0.6f, 0.9f);
         [SerializeField] private Color snowColor = new Color(0.8f, 0.9f, 1f);
         [SerializeField] private Color thunderColor = new Color(0.2f, 0.2f, 0.3f);
@@ -46,25 +48,25 @@ namespace WeatherOrNot.App.WeatherManager
             {
                 case WeatherTypes.Clear:
                     tilemap.color = clearColor;
+                    tilemapDangersRenderer.gameObject.SetActive(true);
                     break;
                 case WeatherTypes.Rain:
+                    tilemapDangersRenderer.gameObject.SetActive(true);
                     tilemap.color = rainColor;
                     break;
                 case WeatherTypes.Snow:
                     tilemap.color = snowColor;
+                    tilemapDangersRenderer.gameObject.SetActive(false);
                     break;
                 case WeatherTypes.Thunderstorm:
+                    tilemapDangersRenderer.gameObject.SetActive(true);
                     tilemap.color = thunderColor;
                     break;
                 case WeatherTypes.Windy:
+                    tilemapDangersRenderer.gameObject.SetActive(true);
                     tilemap.color = windyColor;
                     break;
             }
-
-            Debug.Log($"Tilemap color changed to {weather}");
         }
     }
-
-    
-
 }

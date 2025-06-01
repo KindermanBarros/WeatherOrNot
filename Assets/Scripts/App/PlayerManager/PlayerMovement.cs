@@ -10,20 +10,22 @@ namespace WeatherOrNot.App.PlayerManager
         [Header("Movement Settings")] [SerializeField]
         private float m_moveSpeed = 8f;
 
-        [SerializeField] private float m_jumpForce = 8f;
+        [SerializeField] private float m_jumpUpwardSpeed = 8f;
         [SerializeField] private float m_wallJumpForce = 10f;
         [SerializeField] private Vector2 m_wallJumpDirection = new(1, 1);
 
+        [Header("Jump Gravity Settings")] [SerializeField]
+        private float m_fallMultiplier = 2.5f;
+
+        [SerializeField] private float m_lowJumpMultiplier = 2f;
 
         [Header("Tolerance Time")] [SerializeField]
         private float m_coyoteTime = 0.2f;
 
-        [SerializeField] private float m_jumpBufferTime = 0.15f;
-
+        [SerializeField] private float m_jumpBufferTime = 0.05f;
 
         [Header("Wall Slide")] [SerializeField]
         private float m_wallSlideSpeed = 2f;
-
 
         [Header("Dash Settings")] [SerializeField]
         private float m_dashSpeed = 20f;
@@ -51,13 +53,50 @@ namespace WeatherOrNot.App.PlayerManager
         {
             m_rb = GetComponent<Rigidbody2D>();
             m_lastGroundedTime = Time.time;
-            m_rb.linearVelocity = Vector2.zero;
         }
 
         private void Update()
         {
             if (Time.time < 0.1f) return;
 
+            HandleInput();
+            FlipCharacter(m_horizontalInput);
+            HandleWallSlide();
+            HandleJump();
+            HandleAnimations();
+        }
+
+        private void FixedUpdate()
+        {
+            if (m_isDashing)
+            {
+                ApplyDash();
+                return;
+            }
+
+            ApplyMovement();
+
+            if (!m_isWallSliding)
+            {
+                var velocity = m_rb.linearVelocity;
+
+                if (velocity.y < 0)
+                {
+                    velocity.y += Physics2D.gravity.y * (m_fallMultiplier - 1) * Time.fixedDeltaTime;
+                    m_rb.linearVelocity = velocity;
+                }
+                else if (velocity.y > 0 && !Input.GetButton("Jump"))
+                {
+                    velocity.y += Physics2D.gravity.y * (m_lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+                    m_rb.linearVelocity = velocity;
+                }
+            }
+
+            ApplyWallSlide();
+        }
+
+        private void HandleInput()
+        {
             m_horizontalInput = Input.GetAxisRaw("Horizontal");
 
             if (Input.GetButtonDown("Jump"))
@@ -66,70 +105,47 @@ namespace WeatherOrNot.App.PlayerManager
             if (Input.GetKeyDown(KeyCode.Q))
                 TryDash();
 
-            if (Input.GetKeyDown(KeyCode.Z))
-                SetSnowy();
-
-            if (Input.GetKeyDown(KeyCode.X))
-                SetSunny();
-
-            if (Input.GetKeyDown(KeyCode.C))
-                SetThunderstorm();
-
-            if (Input.GetKeyDown(KeyCode.V))
-                SetWindy();
-
-            if (Input.GetKeyDown(KeyCode.B))
-                SetRain();
-
-            FlipCharacter(m_horizontalInput);
-            HandleWallSlide();
-            HandleJump();
+            if (Input.GetKeyDown(KeyCode.Z)) SetSnowy();
+            if (Input.GetKeyDown(KeyCode.X)) SetSunny();
+            if (Input.GetKeyDown(KeyCode.C)) SetThunderstorm();
+            if (Input.GetKeyDown(KeyCode.V)) SetWindy();
+            if (Input.GetKeyDown(KeyCode.B)) SetRain();
         }
 
-        private void FixedUpdate()
+        private void ApplyMovement()
         {
-            if (m_isDashing)
-            {
-                m_rb.linearVelocity = new Vector2((m_isFacingRight ? 1 : -1) * m_dashSpeed, 0);
-                if (Time.time > m_dashTime)
-                {
-                    m_isDashing = false;
-                }
-
-                return;
-            }
-
             var currentVelocity = m_rb.linearVelocity;
             currentVelocity.x = m_horizontalInput * m_moveSpeed;
             m_rb.linearVelocity = new Vector2(currentVelocity.x, m_rb.linearVelocity.y);
+        }
 
+        private void ApplyWallSlide()
+        {
             if (m_isWallSliding)
             {
                 m_rb.linearVelocity = new Vector2(m_rb.linearVelocity.x, -m_wallSlideSpeed);
             }
         }
 
-        private void FlipCharacter(float direction)
+        private void ApplyDash()
         {
-            switch (direction)
+            m_rb.linearVelocity = new Vector2((m_isFacingRight ? 1 : -1) * m_dashSpeed, 0);
+            //TODO: Play Dash Animation
+
+            if (Time.time > m_dashTime)
             {
-                case 0:
-                    return;
-                case > 0 when !m_isFacingRight:
-                case < 0 when m_isFacingRight:
-                {
-                    m_isFacingRight = !m_isFacingRight;
-                    var _scale = transform.localScale;
-                    _scale.x *= -1;
-                    transform.localScale = _scale;
-                    break;
-                }
+                m_isDashing = false;
+                //TODO: End Dash Animation
             }
         }
 
         private void HandleWallSlide()
         {
             m_isWallSliding = m_isTouchingWall && !m_isGrounded && m_rb.linearVelocity.y < 0f;
+            if (m_isWallSliding)
+            {
+                //TODO: Play Wall Slide Animation
+            }
         }
 
         private void HandleJump()
@@ -146,12 +162,71 @@ namespace WeatherOrNot.App.PlayerManager
                 m_rb.linearVelocity = Vector2.zero;
                 m_rb.AddForce(force, ForceMode2D.Impulse);
                 m_lastJumpPressedTime = -1;
+
+                //TODO: Play Wall Jump Animation
             }
             else if (m_isGrounded || canUseCoyote)
             {
-                m_rb.linearVelocity = new Vector2(m_rb.linearVelocity.x, m_jumpForce);
+                m_rb.linearVelocity = new Vector2(m_rb.linearVelocity.x, m_jumpUpwardSpeed);
                 m_lastJumpPressedTime = -1;
+
+                //TODO: Play Jump Animation
             }
+        }
+
+        private void HandleAnimations()
+        {
+            if (m_isDashing) return;
+
+            if (!m_isGrounded)
+            {
+                if (m_rb.linearVelocity.y > 0)
+                {
+                    //TODO: Play Jump Rising Animation
+                }
+                else if (m_rb.linearVelocity.y < 0)
+                {
+                    //TODO: Play Falling Animation
+                }
+
+                return;
+            }
+
+            if (Mathf.Abs(m_horizontalInput) > 0.1f)
+            {
+                //TODO: Play Walking Animation
+            }
+            else
+            {
+                //TODO: Play Idle Animation
+            }
+        }
+
+        private void FlipCharacter(float direction)
+        {
+            switch (direction)
+            {
+                case 0:
+                    return;
+                case > 0 when !m_isFacingRight:
+                case < 0 when m_isFacingRight:
+                {
+                    m_isFacingRight = !m_isFacingRight;
+                    var scale = transform.localScale;
+                    scale.x *= -1;
+                    transform.localScale = scale;
+                    break;
+                }
+            }
+        }
+
+        private void TryDash()
+        {
+            if (Time.time < m_lastDashTime + m_dashCooldown) return;
+
+            m_isDashing = true;
+            m_dashTime = Time.time + m_dashDuration;
+            m_lastDashTime = Time.time;
         }
 
         private void TryChangeWeather(WeatherTypes weather)
@@ -159,40 +234,11 @@ namespace WeatherOrNot.App.PlayerManager
             EventBus.Notify(this, new ChangeWeatherEvent(weather));
         }
 
-        private void SetRain()
-        {
-            TryChangeWeather(WeatherTypes.Rain);
-        }
-
-        private void SetSnowy()
-        {
-            TryChangeWeather(WeatherTypes.Snow);
-        }
-
-        private void SetSunny()
-        {
-            TryChangeWeather(WeatherTypes.Clear);
-        }
-
-        private void SetThunderstorm()
-        {
-            TryChangeWeather(WeatherTypes.Thunderstorm);
-        }
-
-        private void SetWindy()
-        {
-            TryChangeWeather(WeatherTypes.Windy);
-        }
-
-        private void TryDash()
-        {
-            if (Time.time < m_lastDashTime + m_dashCooldown)
-                return;
-
-            m_isDashing = true;
-            m_dashTime = Time.time + m_dashDuration;
-            m_lastDashTime = Time.time;
-        }
+        private void SetRain() => TryChangeWeather(WeatherTypes.Rain);
+        private void SetSnowy() => TryChangeWeather(WeatherTypes.Snow);
+        private void SetSunny() => TryChangeWeather(WeatherTypes.Clear);
+        private void SetThunderstorm() => TryChangeWeather(WeatherTypes.Thunderstorm);
+        private void SetWindy() => TryChangeWeather(WeatherTypes.Windy);
 
         private void OnCollisionStay2D(Collision2D collision)
         {

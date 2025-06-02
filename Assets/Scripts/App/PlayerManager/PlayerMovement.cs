@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using WeatherOrNot.Events.Animation;
 using WeatherOrNot.Events.Weather;
 using WeatherOrNot.Utils;
 
@@ -87,6 +88,22 @@ namespace WeatherOrNot.App.PlayerManager
             if (Time.time < 0.1f) return;
 
             HandleInput();
+            m_horizontalInput = Input.GetAxisRaw("Horizontal");
+
+            if (Input.GetButtonDown("Jump"))
+                m_lastJumpPressedTime = Time.time;
+
+            if (Input.GetKeyDown(KeyCode.Z))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Snow));
+            if (Input.GetKeyDown(KeyCode.X))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Clear));
+            if (Input.GetKeyDown(KeyCode.C))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Thunderstorm));
+            if (Input.GetKeyDown(KeyCode.V))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Windy));
+            if (Input.GetKeyDown(KeyCode.B))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Rain));
+
             FlipCharacter(m_horizontalInput);
             HandleWallSlide();
             HandleJump();
@@ -162,7 +179,7 @@ namespace WeatherOrNot.App.PlayerManager
         private void ApplyDash()
         {
             m_rb.linearVelocity = new Vector2((m_isFacingRight ? 1 : -1) * m_dashSpeed, 0);
-            //TODO: Play Dash Animation
+            EventBus.Notify(this, new StartDashEvent());
 
             if (Time.time > m_dashTime)
             {
@@ -192,7 +209,8 @@ namespace WeatherOrNot.App.PlayerManager
             m_isWallSliding = m_isTouchingWall && !m_isGrounded && m_rb.linearVelocity.y < 0f;
             if (m_isWallSliding)
             {
-                //TODO: Play Wall Slide Animation
+                EventBus.Notify(this, new StartWallSlidingEvent());
+
             }
         }
 
@@ -212,6 +230,8 @@ namespace WeatherOrNot.App.PlayerManager
                 m_rb.linearVelocity = Vector2.zero;
                 m_rb.AddForce(force, ForceMode2D.Impulse);
                 m_lastJumpPressedTime = -1;
+                
+                EventBus.Notify(this, new StartWallJumpingEvent());
                 playedJumpSound = true;
 
                 //TODO: Play Wall Jump Animation
@@ -220,6 +240,7 @@ namespace WeatherOrNot.App.PlayerManager
             {
                 m_rb.linearVelocity = new Vector2(m_rb.linearVelocity.x, m_jumpUpwardSpeed);
                 m_lastJumpPressedTime = -1;
+                EventBus.Notify(this, new StartJumpingEvent());
                 playedJumpSound = true;
 
                 if (playedJumpSound && m_jumpSound != null)
@@ -240,10 +261,14 @@ namespace WeatherOrNot.App.PlayerManager
                 if (m_rb.linearVelocity.y > 0)
                 {
                     //TODO: Play Jump Rising Animation
+                    EventBus.Notify(this, new StartJumpingEvent());
+
                 }
                 else if (m_rb.linearVelocity.y < 0)
                 {
                     //TODO: Play Falling Animation
+                    EventBus.Notify(this, new StartEndJumpingEvent());
+
                 }
 
                 return;
@@ -251,11 +276,13 @@ namespace WeatherOrNot.App.PlayerManager
 
             if (Mathf.Abs(m_horizontalInput) > 0.1f)
             {
-                //TODO: Play Walking Animation
+                EventBus.Notify(this, new StartWalkingEvent());
             }
             else
             {
                 //TODO: Play Idle Animation
+                EventBus.Notify(this, new StartIdleEvent());
+                return;
             }
 
             //EventBus.Notify(this, new ChangeWeatherEvent(weather));

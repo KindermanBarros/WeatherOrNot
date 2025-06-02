@@ -133,6 +133,8 @@ GameObject:
   - component: {fileID: 261796145}
   - component: {fileID: 261796141}
   - component: {fileID: 261796144}
+  - component: {fileID: 261796146}
+  - component: {fileID: 261796147}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -149,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 261796139}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.683, y: -1.79, z: 0}
+  m_LocalPosition: {x: -5.683, y: -2.37, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -286,7 +288,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 999
   m_Sprite: {fileID: -4654964282214106459, guid: fa2257e03f71af54ebca57474689f4d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -312,7 +314,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerMovement: {fileID: 261796141}
   m_dangerTag: Danger
-  m_respawnDelay: 0
+  m_respawnDelay: 0.5
+--- !u!95 &261796146
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261796139}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21e323e3a6c41f3499e586fcaa12a877, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &261796147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261796139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ac2a04cef8d1b419ed07ee40b0ce26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 261796146}
 --- !u!1 &314799065
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +569,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 1.110223e-16, y: -0.0000000068072525, z: 7.5575685e-25, w: 1}
-  m_LocalPosition: {x: -5.683, y: -1.79, z: -10}
+  m_LocalPosition: {x: -5.683, y: -2.37, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -943,7 +980,7 @@ Transform:
   m_GameObject: {fileID: 678582258}
   serializedVersion: 2
   m_LocalRotation: {x: 1.110223e-16, y: -0.0000000068072525, z: -3.917094e-18, w: 1}
-  m_LocalPosition: {x: -5.683, y: -1.79, z: -10}
+  m_LocalPosition: {x: -5.683, y: -2.37, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1371,6 +1408,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728c2e13bae24a17a7ad207fde089019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_weatherVisualController: {fileID: 0}
+--- !u!1 &1347003010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1347003012}
+  - component: {fileID: 1347003013}
+  m_Layer: 0
+  m_Name: WeatherController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1347003012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347003010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.80058, y: -1.45243, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1347003013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347003010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab343035223d4820816bca20ab2c8600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 2072026064}
+  tilemapDangersRenderer: {fileID: 774314569}
+  clearColor: {r: 0.31394622, g: 0.8018868, b: 0.38697588, a: 1}
+  rainColor: {r: 0.4, g: 0.6, b: 0.9, a: 1}
+  snowColor: {r: 0.8, g: 0.9, b: 1, a: 1}
+  thunderColor: {r: 0.2, g: 0.2, b: 0.3, a: 1}
+  windyColor: {r: 0.7, g: 0.85, b: 0.9, a: 1}
 --- !u!1 &2072026058
 GameObject:
   m_ObjectHideFlags: 0
@@ -9226,3 +9315,4 @@ SceneRoots:
   - {fileID: 261796140}
   - {fileID: 1296242224}
   - {fileID: 1287158109}
+  - {fileID: 1347003012}

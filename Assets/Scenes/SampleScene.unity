@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveSpeed: 8
-  m_jumpUpwardSpeed: 6
+  m_jumpUpwardSpeed: 8
   m_wallJumpForce: 7
   m_wallJumpDirection: {x: 1, y: 1}
   m_fallMultiplier: 4
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerMovement: {fileID: 261796141}
   m_dangerTag: Danger
-  m_respawnDelay: 0.5
+  m_respawnDelay: 1
 --- !u!95 &261796146
 Animator:
   serializedVersion: 7

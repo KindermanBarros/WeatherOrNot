@@ -1,57 +1,49 @@
-using System.Collections;
 using UnityEngine;
 using WeatherOrNot.Events.Animation;
 using WeatherOrNot.Events.Weather;
 using WeatherOrNot.Utils;
+using FMOD.Studio;
 
 namespace WeatherOrNot.App.PlayerManager
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("Movement Settings")] [SerializeField]
+        [Header("Movement Settings")]
+        [SerializeField]
         private float m_moveSpeed = 8f;
-
         [SerializeField] private float m_jumpUpwardSpeed = 8f;
         [SerializeField] private float m_wallJumpForce = 10f;
         [SerializeField] private Vector2 m_wallJumpDirection = new(1, 1);
 
-        [Header("Jump Gravity Settings")] [SerializeField]
-        private float m_fallMultiplier = 2.5f;
 
+        [Header("Jump Gravity Settings")]
+        [SerializeField]
+        private float m_fallMultiplier = 2.5f;
         [SerializeField] private float m_lowJumpMultiplier = 2f;
 
-        [Header("Tolerance Time")] [SerializeField]
-        private float m_coyoteTime = 0.2f;
 
+        [Header("Tolerance Time")]
+        [SerializeField]
+        private float m_coyoteTime = 0.2f;
         [SerializeField] private float m_jumpBufferTime = 0.05f;
 
-        [Header("Wall Slide")] [SerializeField]
+
+        [Header("Wall Slide")]
+        [SerializeField]
         private float m_wallSlideSpeed = 2f;
 
-        [Header("Dash Settings")] [SerializeField]
-        private float m_dashSpeed = 20f;
 
+        [Header("Dash Settings")]
+        [SerializeField]
+        private float m_dashSpeed = 20f;
         [SerializeField] private float m_dashDuration = 0.2f;
         [SerializeField] private float m_dashCooldown = 1f;
 
 
-        [Header("Player SFX")] [SerializeField]
-        private AudioSource m_audioSource;
-        [SerializeField] private AudioClip m_jumpSound;
-        [SerializeField] private AudioClip m_dashSound;
-        [SerializeField] private AudioClip m_landSound;
-        [SerializeField] private AudioClip m_footstepsSound1;
-        [SerializeField] private AudioClip m_footstepsSound2;
-
-
-        [Header("Weather SFX")] [SerializeField]
-        private AudioSource weatherAudioSource;
-        [SerializeField] private AudioClip rainSound;
-        [SerializeField] private AudioClip snowSound;
-        [SerializeField] private AudioClip sunnySound;
-        [SerializeField] private AudioClip thunderstormSound;
-        [SerializeField] private AudioClip windySound;
+        [Header("Audio Settings")]
+        [SerializeField]
+        private EventInstance m_footstepSound;
 
 
         private Rigidbody2D m_rb;
@@ -70,17 +62,16 @@ namespace WeatherOrNot.App.PlayerManager
         private float m_dashTime;
         private float m_lastDashTime;
 
-        private float m_footstepInterval = 0.4f;
-        private int m_footstepIndex = 0;
-        private bool m_canPlayFootstep = true;
-        private bool isMoving => Mathf.Abs(m_horizontalInput) > 0.1f;
-
         private void Awake()
         {
             m_rb = GetComponent<Rigidbody2D>();
             m_lastGroundedTime = Time.time;
             m_rb.linearVelocity = Vector2.zero;
-            weatherAudioSource = Camera.main.GetComponent<AudioSource>();
+        }
+
+        private void Start()
+        {
+            m_footstepSound = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
         }
 
         private void Update()
@@ -94,25 +85,21 @@ namespace WeatherOrNot.App.PlayerManager
                 m_lastJumpPressedTime = Time.time;
 
             if (Input.GetKeyDown(KeyCode.Z))
-                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Snow));
-            if (Input.GetKeyDown(KeyCode.X))
                 EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Clear));
-            if (Input.GetKeyDown(KeyCode.C))
-                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Thunderstorm));
-            if (Input.GetKeyDown(KeyCode.V))
-                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Windy));
-            if (Input.GetKeyDown(KeyCode.B))
+            if (Input.GetKeyDown(KeyCode.X))
                 EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Rain));
+            if (Input.GetKeyDown(KeyCode.C))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Snow));
+            if (Input.GetKeyDown(KeyCode.V))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Thunderstorm));
+            if (Input.GetKeyDown(KeyCode.B))
+                EventBus.Notify(this, new ChangeWeatherEvent(WeatherTypes.Windy));
 
             FlipCharacter(m_horizontalInput);
             HandleWallSlide();
             HandleJump();
             HandleAnimations();
-
-            if (isMoving && m_canPlayFootstep)
-            {
-                StartCoroutine(PlayFootstepWithDelay());
-            }
+            UpdateSound();
         }
 
         private void FixedUpdate()
@@ -188,22 +175,6 @@ namespace WeatherOrNot.App.PlayerManager
             }
         }
 
-        private IEnumerator PlayFootstepWithDelay()
-        {
-            m_canPlayFootstep = false;
-            if (m_isGrounded && isMoving)
-            {
-                AudioClip clipToPlay = m_footstepIndex == 0 ? m_footstepsSound1 : m_footstepsSound2;
-                if (clipToPlay != null)
-                {
-                    m_audioSource.PlayOneShot(clipToPlay);
-                }
-                m_footstepIndex = 1 - m_footstepIndex;
-            }
-            yield return new WaitForSeconds(m_footstepInterval);
-            m_canPlayFootstep = true;
-        }
-
         private void HandleWallSlide()
         {
             m_isWallSliding = m_isTouchingWall && !m_isGrounded && m_rb.linearVelocity.y < 0f;
@@ -221,8 +192,6 @@ namespace WeatherOrNot.App.PlayerManager
 
             if (!jumpBuffered) return;
 
-            bool playedJumpSound = false;
-
             if (m_isWallSliding)
             {
                 var force = new Vector2(-m_wallDirection * m_wallJumpDirection.x * m_wallJumpForce,
@@ -230,9 +199,8 @@ namespace WeatherOrNot.App.PlayerManager
                 m_rb.linearVelocity = Vector2.zero;
                 m_rb.AddForce(force, ForceMode2D.Impulse);
                 m_lastJumpPressedTime = -1;
-                
+
                 EventBus.Notify(this, new StartWallJumpingEvent());
-                playedJumpSound = true;
 
                 //TODO: Play Wall Jump Animation
             }
@@ -241,12 +209,6 @@ namespace WeatherOrNot.App.PlayerManager
                 m_rb.linearVelocity = new Vector2(m_rb.linearVelocity.x, m_jumpUpwardSpeed);
                 m_lastJumpPressedTime = -1;
                 EventBus.Notify(this, new StartJumpingEvent());
-                playedJumpSound = true;
-
-                if (playedJumpSound && m_jumpSound != null)
-                {
-                    m_audioSource.PlayOneShot(m_jumpSound);
-                }
 
                 //TODO: Play Jump Animation
             }
@@ -288,43 +250,29 @@ namespace WeatherOrNot.App.PlayerManager
             //EventBus.Notify(this, new ChangeWeatherEvent(weather));
         }
 
-        private void PlayWeatherSound(AudioClip clip)
-        {
-            if (weatherAudioSource == null || clip == null) return;
-
-            weatherAudioSource.Stop();
-            weatherAudioSource.clip = clip;
-            weatherAudioSource.Play();
-        }
-
         private void SetRain()
         {
             TryChangeWeather(WeatherTypes.Rain);
-            PlayWeatherSound(rainSound);
         }
 
         private void SetSnowy()
         {
             TryChangeWeather(WeatherTypes.Snow);
-            PlayWeatherSound(snowSound);
         }
 
         private void SetSunny()
         {
             TryChangeWeather(WeatherTypes.Clear);
-            PlayWeatherSound(sunnySound);
         }
-        
+
         private void SetThunderstorm()
         {
             TryChangeWeather(WeatherTypes.Thunderstorm);
-            PlayWeatherSound(thunderstormSound);
         }
 
         private void SetWindy()
         {
             TryChangeWeather(WeatherTypes.Windy);
-            PlayWeatherSound(windySound);
         }
 
         private void FlipCharacter(float direction)
@@ -352,11 +300,6 @@ namespace WeatherOrNot.App.PlayerManager
             m_isDashing = true;
             m_dashTime = Time.time + m_dashDuration;
             m_lastDashTime = Time.time;
-
-            if (m_dashSound != null)
-            {
-                m_audioSource.PlayOneShot(m_dashSound);
-            }
         }
 
         private void TryChangeWeather(WeatherTypes weather)
@@ -375,10 +318,6 @@ namespace WeatherOrNot.App.PlayerManager
                 {
                     m_isGrounded = true;
                     m_lastGroundedTime = Time.time;
-                    if (!m_isGrounded && contact.normal.y > 0.5f && m_landSound != null)
-                    {
-                        m_audioSource.PlayOneShot(m_landSound);
-                    }
                 }
                 else if (Mathf.Abs(contact.normal.x) > 0.5f)
                 {
@@ -393,5 +332,24 @@ namespace WeatherOrNot.App.PlayerManager
             m_isGrounded = false;
             m_isTouchingWall = false;
         }
+
+        private void UpdateSound()
+        {
+            if (Mathf.Abs(m_rb.linearVelocity.x) > 0.1f && m_isGrounded)
+            {
+                PLAYBACK_STATE playbackState;
+                m_footstepSound.getPlaybackState(out playbackState);
+
+                if (playbackState != PLAYBACK_STATE.PLAYING)
+                {
+                    m_footstepSound.start();
+                }
+            }
+            else
+            {
+                m_footstepSound.stop(STOP_MODE.ALLOWFADEOUT);
+            }
+        }
+
     }
 }

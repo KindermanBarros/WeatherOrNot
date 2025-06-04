@@ -2,17 +2,13 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-
 namespace WeatherOrNot.App
 {
-   
     public class VolumeSettings : MonoBehaviour
     {
-
         [SerializeField] private AudioMixer myMixer;
         [SerializeField] private Slider musicSlider;
         [SerializeField] private Slider sfxSlider;
-
 
         private void Start()
         {

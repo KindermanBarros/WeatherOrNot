@@ -1,4 +1,4 @@
-﻿%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!74 &7400000
 AnimationClip:
@@ -22,21 +22,21 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 6031638029220357244, guid: 49426dd27248d874898fca0fff1173d0, type: 3}
-    - time: 0.083333336
+    - time: 0.13333334
       value: {fileID: 1571425076208196366, guid: 4b63e6be2b8dc79429acde3a4e270efe, type: 3}
-    - time: 0.16666667
-      value: {fileID: -2188511133470152854, guid: 96e551707a1555747a6d445e7fc860ad, type: 3}
     - time: 0.25
+      value: {fileID: -2188511133470152854, guid: 96e551707a1555747a6d445e7fc860ad, type: 3}
+    - time: 0.36666667
       value: {fileID: -3497175431945785132, guid: 9e53841a9768c254f8f1d3e2dd90fcfa, type: 3}
-    - time: 0.33333334
-      value: {fileID: -3813829537369303334, guid: 589927a995bf6fb44adbbea1a31d062b, type: 3}
-    - time: 0.41666666
-      value: {fileID: 5474735298150704194, guid: ffefee0623a16b4499b2a699623d5ad9, type: 3}
     - time: 0.5
+      value: {fileID: -3813829537369303334, guid: 589927a995bf6fb44adbbea1a31d062b, type: 3}
+    - time: 0.6333333
+      value: {fileID: 5474735298150704194, guid: ffefee0623a16b4499b2a699623d5ad9, type: 3}
+    - time: 0.75
       value: {fileID: 8709584511152253848, guid: 4d8f9fc54de2fcc41a150c957558dbd0, type: 3}
-    - time: 0.5833333
+    - time: 0.8666667
       value: {fileID: -2969250942550055260, guid: 76fae7ef42b914f489fb5f4a0177972e, type: 3}
-    - time: 0.6666667
+    - time: 1
       value: {fileID: 7726711833477232535, guid: 3786720356477424a9db5f155e40714f, type: 3}
     attribute: m_Sprite
     path: 
@@ -74,7 +74,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.68333334
+    m_StopTime: 1.0166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

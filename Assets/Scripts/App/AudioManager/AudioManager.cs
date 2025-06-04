@@ -5,10 +5,13 @@ public class AudioManager : MonoBehaviour
 {
     private static AudioManager _instance;
 
-    [Header("Audio Groups")] public AudioMixerGroup musicGroup;
-    public AudioMixerGroup ambienceGroup;
-    public AudioMixerGroup footstepsGroup;
-    public AudioMixerGroup eventsGroup;
+    [Header("Audio Groups")] [SerializeField]
+    public AudioMixerGroup MainAudioMixer;
+
+    [SerializeField] public AudioMixerGroup MusicGroup;
+    [SerializeField] public AudioMixerGroup AmbienceGroup;
+    [SerializeField] public AudioMixerGroup FootstepsGroup;
+    [SerializeField] public AudioMixerGroup EventsGroup;
 
     public void Awake()
     {

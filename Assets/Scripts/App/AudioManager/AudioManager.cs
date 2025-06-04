@@ -1,32 +1,36 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
-namespace WeatherOrNot.App
+public class AudioManager : MonoBehaviour
 {
-    public class AudioManager : MonoBehaviour
+    private static AudioManager _instance;
+
+    [Header("Audio Groups")] public AudioMixerGroup musicGroup;
+    public AudioMixerGroup ambienceGroup;
+    public AudioMixerGroup footstepsGroup;
+    public AudioMixerGroup eventsGroup;
+
+    public void Awake()
     {
-        [Header("---------  Audio Source    ---------")]
-        [SerializeField] AudioSource SFXSource;
-        [SerializeField] AudioSource musicSource;
-
-        [Header("---------  Audio Clip      ---------")]
-        public AudioClip bgMusic;
-        public AudioClip gumDeath;
-        public AudioClip bubbleDeath;
-        public AudioClip gumJump;
-        public AudioClip bubbleJump;
-        public AudioClip MenuSelection;
-
-
-        private void Start()
+        if (_instance == null)
         {
-            musicSource.clip = bgMusic;
-            musicSource.Play();
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-
-
-        public void PlaySFX(AudioClip clip)
+        else
         {
-            SFXSource.PlayOneShot(clip);
+            Destroy(gameObject);
         }
+    }
+
+    public void PlaySfx(AudioClip clip, AudioMixerGroup group, float volume = 1f)
+    {
+        var sfxObj = new GameObject("SFX_" + clip.name);
+        var source = sfxObj.AddComponent<AudioSource>();
+        source.outputAudioMixerGroup = group;
+        source.clip = clip;
+        source.volume = volume;
+        source.Play();
+        Destroy(sfxObj, clip.length + 0.1f);
     }
 }

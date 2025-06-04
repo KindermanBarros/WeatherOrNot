@@ -2406,7 +2406,6 @@ GameObject:
   - component: {fileID: 381181830}
   - component: {fileID: 381181829}
   - component: {fileID: 381181828}
-  - component: {fileID: 381181832}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2499,18 +2498,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &381181832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381181827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0279ea086a2ca5044b81d7d069717119, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &399235305
 GameObject:
   m_ObjectHideFlags: 0
@@ -5118,7 +5105,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 381181832}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VolumeSettings, Assembly-CSharp
         m_MethodName: SetSFXVolume
         m_Mode: 1
@@ -7756,13 +7743,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
+    - {fileID: 0}
     - {fileID: 3678489308141511663, guid: 17f73292052f23847b56f2a4bc2dd7fb, type: 3}
+    - {fileID: 4612757192064784499, guid: 17f73292052f23847b56f2a4bc2dd7fb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 126051923450152402, guid: 17f73292052f23847b56f2a4bc2dd7fb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1910192454}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17f73292052f23847b56f2a4bc2dd7fb, type: 3}
 --- !u!1 &1699666849
 GameObject:
@@ -8068,7 +8054,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 381181832}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VolumeSettings, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 1
@@ -8145,31 +8131,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &1910192450 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 126051923450152402, guid: 17f73292052f23847b56f2a4bc2dd7fb, type: 3}
-  m_PrefabInstance: {fileID: 1699452630}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1910192454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910192450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 241beb8d790c5114994c285208be5204, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SFXSource: {fileID: 0}
-  musicSource: {fileID: 0}
-  bgMusic: {fileID: 0}
-  gumDeath: {fileID: 0}
-  bubbleDeath: {fileID: 0}
-  gumJump: {fileID: 0}
-  bubbleJump: {fileID: 0}
-  MenuSelection: {fileID: 0}
 --- !u!1 &1915890124
 GameObject:
   m_ObjectHideFlags: 0

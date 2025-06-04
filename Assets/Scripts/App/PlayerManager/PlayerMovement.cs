@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using WeatherOrNot.Events.Animation;
 using WeatherOrNot.Events.Weather;
@@ -34,6 +35,25 @@ namespace WeatherOrNot.App.PlayerManager
         [SerializeField] private float m_dashDuration = 0.2f;
         [SerializeField] private float m_dashCooldown = 1f;
 
+
+        [Header("Player SFX")] [SerializeField]
+        private AudioSource m_audioSource;
+        [SerializeField] private AudioClip m_jumpSound;
+        [SerializeField] private AudioClip m_dashSound;
+        [SerializeField] private AudioClip m_landSound;
+        [SerializeField] private AudioClip m_footstepsSound1;
+        [SerializeField] private AudioClip m_footstepsSound2;
+
+
+        [Header("Weather SFX")] [SerializeField]
+        private AudioSource weatherAudioSource;
+        [SerializeField] private AudioClip rainSound;
+        [SerializeField] private AudioClip snowSound;
+        [SerializeField] private AudioClip sunnySound;
+        [SerializeField] private AudioClip thunderstormSound;
+        [SerializeField] private AudioClip windySound;
+
+
         private Rigidbody2D m_rb;
         private float m_horizontalInput;
 
@@ -50,10 +70,17 @@ namespace WeatherOrNot.App.PlayerManager
         private float m_dashTime;
         private float m_lastDashTime;
 
+        private float m_footstepInterval = 0.4f;
+        private int m_footstepIndex = 0;
+        private bool m_canPlayFootstep = true;
+        private bool isMoving => Mathf.Abs(m_horizontalInput) > 0.1f;
+
         private void Awake()
         {
             m_rb = GetComponent<Rigidbody2D>();
             m_lastGroundedTime = Time.time;
+            m_rb.linearVelocity = Vector2.zero;
+            weatherAudioSource = Camera.main.GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -81,6 +108,11 @@ namespace WeatherOrNot.App.PlayerManager
             HandleWallSlide();
             HandleJump();
             HandleAnimations();
+
+            if (isMoving && m_canPlayFootstep)
+            {
+                StartCoroutine(PlayFootstepWithDelay());
+            }
         }
 
         private void FixedUpdate()
@@ -156,6 +188,22 @@ namespace WeatherOrNot.App.PlayerManager
             }
         }
 
+        private IEnumerator PlayFootstepWithDelay()
+        {
+            m_canPlayFootstep = false;
+            if (m_isGrounded && isMoving)
+            {
+                AudioClip clipToPlay = m_footstepIndex == 0 ? m_footstepsSound1 : m_footstepsSound2;
+                if (clipToPlay != null)
+                {
+                    m_audioSource.PlayOneShot(clipToPlay);
+                }
+                m_footstepIndex = 1 - m_footstepIndex;
+            }
+            yield return new WaitForSeconds(m_footstepInterval);
+            m_canPlayFootstep = true;
+        }
+
         private void HandleWallSlide()
         {
             m_isWallSliding = m_isTouchingWall && !m_isGrounded && m_rb.linearVelocity.y < 0f;
@@ -173,6 +221,8 @@ namespace WeatherOrNot.App.PlayerManager
 
             if (!jumpBuffered) return;
 
+            bool playedJumpSound = false;
+
             if (m_isWallSliding)
             {
                 var force = new Vector2(-m_wallDirection * m_wallJumpDirection.x * m_wallJumpForce,
@@ -182,12 +232,23 @@ namespace WeatherOrNot.App.PlayerManager
                 m_lastJumpPressedTime = -1;
                 
                 EventBus.Notify(this, new StartWallJumpingEvent());
+                playedJumpSound = true;
+
+                //TODO: Play Wall Jump Animation
             }
             else if (m_isGrounded || canUseCoyote)
             {
                 m_rb.linearVelocity = new Vector2(m_rb.linearVelocity.x, m_jumpUpwardSpeed);
                 m_lastJumpPressedTime = -1;
                 EventBus.Notify(this, new StartJumpingEvent());
+                playedJumpSound = true;
+
+                if (playedJumpSound && m_jumpSound != null)
+                {
+                    m_audioSource.PlayOneShot(m_jumpSound);
+                }
+
+                //TODO: Play Jump Animation
             }
         }
 
@@ -223,6 +284,47 @@ namespace WeatherOrNot.App.PlayerManager
                 EventBus.Notify(this, new StartIdleEvent());
                 return;
             }
+
+            //EventBus.Notify(this, new ChangeWeatherEvent(weather));
+        }
+
+        private void PlayWeatherSound(AudioClip clip)
+        {
+            if (weatherAudioSource == null || clip == null) return;
+
+            weatherAudioSource.Stop();
+            weatherAudioSource.clip = clip;
+            weatherAudioSource.Play();
+        }
+
+        private void SetRain()
+        {
+            TryChangeWeather(WeatherTypes.Rain);
+            PlayWeatherSound(rainSound);
+        }
+
+        private void SetSnowy()
+        {
+            TryChangeWeather(WeatherTypes.Snow);
+            PlayWeatherSound(snowSound);
+        }
+
+        private void SetSunny()
+        {
+            TryChangeWeather(WeatherTypes.Clear);
+            PlayWeatherSound(sunnySound);
+        }
+        
+        private void SetThunderstorm()
+        {
+            TryChangeWeather(WeatherTypes.Thunderstorm);
+            PlayWeatherSound(thunderstormSound);
+        }
+
+        private void SetWindy()
+        {
+            TryChangeWeather(WeatherTypes.Windy);
+            PlayWeatherSound(windySound);
         }
 
         private void FlipCharacter(float direction)
@@ -233,13 +335,13 @@ namespace WeatherOrNot.App.PlayerManager
                     return;
                 case > 0 when !m_isFacingRight:
                 case < 0 when m_isFacingRight:
-                {
-                    m_isFacingRight = !m_isFacingRight;
-                    var scale = transform.localScale;
-                    scale.x *= -1;
-                    transform.localScale = scale;
-                    break;
-                }
+                    {
+                        m_isFacingRight = !m_isFacingRight;
+                        var scale = transform.localScale;
+                        scale.x *= -1;
+                        transform.localScale = scale;
+                        break;
+                    }
             }
         }
 
@@ -250,18 +352,17 @@ namespace WeatherOrNot.App.PlayerManager
             m_isDashing = true;
             m_dashTime = Time.time + m_dashDuration;
             m_lastDashTime = Time.time;
+
+            if (m_dashSound != null)
+            {
+                m_audioSource.PlayOneShot(m_dashSound);
+            }
         }
 
         private void TryChangeWeather(WeatherTypes weather)
         {
             EventBus.Notify(this, new ChangeWeatherEvent(weather));
         }
-
-        private void SetRain() => TryChangeWeather(WeatherTypes.Rain);
-        private void SetSnowy() => TryChangeWeather(WeatherTypes.Snow);
-        private void SetSunny() => TryChangeWeather(WeatherTypes.Clear);
-        private void SetThunderstorm() => TryChangeWeather(WeatherTypes.Thunderstorm);
-        private void SetWindy() => TryChangeWeather(WeatherTypes.Windy);
 
         private void OnCollisionStay2D(Collision2D collision)
         {
@@ -274,6 +375,10 @@ namespace WeatherOrNot.App.PlayerManager
                 {
                     m_isGrounded = true;
                     m_lastGroundedTime = Time.time;
+                    if (!m_isGrounded && contact.normal.y > 0.5f && m_landSound != null)
+                    {
+                        m_audioSource.PlayOneShot(m_landSound);
+                    }
                 }
                 else if (Mathf.Abs(contact.normal.x) > 0.5f)
                 {

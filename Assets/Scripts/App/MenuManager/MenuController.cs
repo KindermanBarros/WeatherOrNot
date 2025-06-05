@@ -1,45 +1,52 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace WeatherOrNot.App
 {
     public class MenuController : MonoBehaviour
     {
-        [Header("Menu Controller")] [SerializeField]
-        private GameObject settingsPanel;
+        [FormerlySerializedAs("settingsPanel")] [Header("Menu Controller")] [SerializeField]
+        private GameObject m_settingsPanel;
 
-        [SerializeField] private GameObject creditsPanel;
-        [SerializeField] private GameObject menuPanel;
-        [SerializeField] private ParticleSystem menuParticles;
-        [SerializeField] private ParticleSystem menuParticles1;
+        [FormerlySerializedAs("creditsPanel")] [SerializeField]
+        private GameObject m_creditsPanel;
+
+        [FormerlySerializedAs("menuPanel")] [SerializeField]
+        private GameObject m_menuPanel;
+
+        [FormerlySerializedAs("menuParticles")] [SerializeField]
+        private ParticleSystem m_menuParticles;
+
+        [FormerlySerializedAs("menuParticles1")] [SerializeField]
+        private ParticleSystem m_menuParticles1;
+
         public void GoToGame()
         {
-            Debug.Log("Ir para o jogo");
             SceneManager.LoadScene(1);
         }
 
         public void OpenSettings()
         {
-            settingsPanel.SetActive(true);
-            menuPanel.SetActive(false);
+            m_settingsPanel.SetActive(true);
+            m_menuPanel.SetActive(false);
         }
 
         public void OpenCredits()
         {
-            creditsPanel.SetActive(true);
-            menuPanel.SetActive(false);
+            m_creditsPanel.SetActive(true);
+            m_menuPanel.SetActive(false);
         }
 
         public void CloseAllPanels()
         {
-            settingsPanel.SetActive(false);
-            creditsPanel.SetActive(false);
-            menuPanel.SetActive(true);
+            m_settingsPanel.SetActive(false);
+            m_creditsPanel.SetActive(false);
+            m_menuPanel.SetActive(true);
         }
 
         public void QuitGame()
         {
-            Debug.Log("Sair do Jogo");
             Application.Quit();
         }
     }

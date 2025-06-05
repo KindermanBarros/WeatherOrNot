@@ -64,11 +64,6 @@ namespace WeatherOrNot.App.PlayerManager
         private float m_dashTime;
         private float m_lastDashTime;
 
-        private float m_footstepInterval = 0.4f;
-        private int m_footstepIndex = 0;
-        private bool m_canPlayFootstep = true;
-        private bool IsMoving => Mathf.Abs(m_horizontalInput) > 0.1f;
-
         private float m_wallJumpLockTime = 0.10f;
         private float m_lastWallJumpTime = -Mathf.Infinity;
         private float m_groundLockTime = 0.08f;
@@ -90,7 +85,6 @@ namespace WeatherOrNot.App.PlayerManager
         {
             if (Time.time < 0.1f) return;
 
-            HandleInput();
             m_horizontalInput = Input.GetAxisRaw("Horizontal");
 
             if (Input.GetButtonDown("Jump"))
@@ -143,29 +137,6 @@ namespace WeatherOrNot.App.PlayerManager
             ApplyWallSlide();
         }
 
-        private void HandleInput()
-        {
-            m_horizontalInput = Input.GetAxisRaw("Horizontal");
-
-            if (Input.GetButtonDown("Jump"))
-                m_lastJumpPressedTime = Time.time;
-
-            if (Input.GetKeyDown(KeyCode.Q))
-                TryDash();
-
-            if (Input.GetKeyDown(KeyCode.Z)) SetWeather(WeatherTypes.Snow, snowSound);
-            if (Input.GetKeyDown(KeyCode.X)) SetWeather(WeatherTypes.Clear, sunnySound);
-            if (Input.GetKeyDown(KeyCode.C)) SetWeather(WeatherTypes.Thunderstorm, thunderstormSound);
-            if (Input.GetKeyDown(KeyCode.V)) SetWeather(WeatherTypes.Windy, windySound);
-            if (Input.GetKeyDown(KeyCode.B)) SetWeather(WeatherTypes.Rain, rainSound);
-        }
-
-        private void SetWeather(WeatherTypes weatherType, AudioClip sound)
-        {
-            TryChangeWeather(weatherType);
-            PlayWeatherSound(sound);
-        }
-
         private void ApplyMovement()
         {
             var currentVelocity = m_rb.linearVelocity;
@@ -190,24 +161,6 @@ namespace WeatherOrNot.App.PlayerManager
             {
                 m_isDashing = false;
             }
-        }
-
-        private IEnumerator PlayFootstepWithDelay()
-        {
-            m_canPlayFootstep = false;
-            if (m_isGrounded && IsMoving)
-            {
-                AudioClip clipToPlay = m_footstepIndex == 0 ? m_footstepsSound1 : m_footstepsSound2;
-                if (clipToPlay != null)
-                {
-                    m_audioSource.PlayOneShot(clipToPlay);
-                }
-
-                m_footstepIndex = 1 - m_footstepIndex;
-            }
-
-            yield return new WaitForSeconds(m_footstepInterval);
-            m_canPlayFootstep = true;
         }
 
         private void HandleWallSlide()
@@ -282,7 +235,6 @@ namespace WeatherOrNot.App.PlayerManager
             RestoreOriginalFacing(originalFacing).Forget();
 
             EventBus.Notify(this, new StartWallJumpingEvent());
-            if (m_jumpSound != null) m_audioSource.PlayOneShot(m_jumpSound);
         }
 
         private async UniTask RestoreOriginalFacing(bool originalFacing)
@@ -307,7 +259,6 @@ namespace WeatherOrNot.App.PlayerManager
             m_lastJumpPressedTime = -1;
 
             EventBus.Notify(this, new StartJumpingEvent());
-            if (m_jumpSound != null) m_audioSource.PlayOneShot(m_jumpSound);
         }
 
         private void HandleAnimations()
@@ -365,15 +316,6 @@ namespace WeatherOrNot.App.PlayerManager
             TryChangeWeather(WeatherTypes.Windy);
         }
 
-        private void PlayWeatherSound(AudioClip clip)
-        {
-            if (weatherAudioSource == null || clip == null) return;
-
-            weatherAudioSource.Stop();
-            weatherAudioSource.clip = clip;
-            weatherAudioSource.Play();
-        }
-
         private void FlipCharacter(float direction)
         {
             switch (direction)
@@ -401,11 +343,6 @@ namespace WeatherOrNot.App.PlayerManager
             m_isDashing = true;
             m_dashTime = Time.time + m_dashDuration;
             m_lastDashTime = Time.time;
-
-            if (m_dashSound != null)
-            {
-                m_audioSource.PlayOneShot(m_dashSound);
-            }
         }
 
         private void TryChangeWeather(WeatherTypes weather)
@@ -498,10 +435,6 @@ namespace WeatherOrNot.App.PlayerManager
                     if (Time.time - m_lastWallJumpTime > m_groundLockTime)
                     {
                         foundGround = true;
-
-                        if (!m_isGrounded && m_landSound != null && m_rb.linearVelocity.y <= 0)
-                            m_audioSource.PlayOneShot(m_landSound);
-
                         m_isGrounded = true;
                         m_lastGroundedTime = Time.time;
                     }

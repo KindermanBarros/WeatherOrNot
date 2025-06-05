@@ -6,19 +6,9 @@ using FMODUnity;
 using FMOD.Studio;
 // using Mono.Cecil;
 
-public class AudioManager : MonoBehaviour
+namespace WeatherOrNot.App
 {
-    private static AudioManager _instance;
-
-    [Header("Audio Groups")] [SerializeField]
-    public AudioMixerGroup MainAudioMixer;
-
-    [SerializeField] public AudioMixerGroup MusicGroup;
-    [SerializeField] public AudioMixerGroup AmbienceGroup;
-    [SerializeField] public AudioMixerGroup FootstepsGroup;
-    [SerializeField] public AudioMixerGroup EventsGroup;
-
-    public void Awake()
+    public class AudioManager : MonoBehaviour
     {
         private List<EventInstance> eventInstances;
 
@@ -118,43 +108,43 @@ public class AudioManager : MonoBehaviour
 
         private void OnDestroy()
         {
-            CleanUp();      
+            CleanUp();
         }
 
-
         /*
-            [Header("--------- Audio Source ---------")]
-            [SerializeField] AudioSource SFXSource;
-            [SerializeField] AudioSource musicSource;
+                [Header("--------- Audio Source ---------")]
+                [SerializeField] AudioSource SFXSource;
+                [SerializeField] AudioSource musicSource;
 
-            [Header("---------- Audio Clip ----------")]
-            public AudioClip bgMusic;
-            public AudioClip gumDeath;
-            public AudioClip bubbleDeath;
-            public AudioClip gumJump;
-            public AudioClip bubbleJump;
-            public AudioClip MenuSelection;
+                [Header("---------- Audio Clip ----------")]
+                public AudioClip bgMusic;
+                public AudioClip gumDeath;
+                public AudioClip bubbleDeath;
+                public AudioClip gumJump;
+                public AudioClip bubbleJump;
+                public AudioClip MenuSelection;
 
-            private void Start()
-            {
-                musicSource.clip = bgMusic;
-                musicSource.Play();
-            }
+                private void Start()
+                {
+                    musicSource.clip = bgMusic;
+                    musicSource.Play();
+                }
 
-            public void PlaySFX(AudioClip clip)
-            {
-                SFXSource.PlayOneShot(clip);
-            }*/
-    }
-
-    public void PlaySfx(AudioClip clip, AudioMixerGroup group, float volume = 1f)
-    {
-        var sfxObj = new GameObject("SFX_" + clip.name);
-        var source = sfxObj.AddComponent<AudioSource>();
-        source.outputAudioMixerGroup = group;
-        source.clip = clip;
-        source.volume = volume;
-        source.Play();
-        Destroy(sfxObj, clip.length + 0.1f);
+                public void PlaySFX(AudioClip clip)
+                {
+                    SFXSource.PlayOneShot(clip);
+                }
+                
+                public void PlaySfx(AudioClip clip, AudioMixerGroup group, float volume = 1f)
+                {
+                    var sfxObj = new GameObject("SFX_" + clip.name);
+                    var source = sfxObj.AddComponent<AudioSource>();
+                    source.outputAudioMixerGroup = group;
+                    source.clip = clip;
+                    source.volume = volume;
+                    source.Play();
+                    Destroy(sfxObj, clip.length + 0.1f);
+                }
+                */
     }
 }

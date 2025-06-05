@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1912478597406741257}
   - component: {fileID: 6754677771338380339}
   - component: {fileID: 7346461446083487599}
-  - component: {fileID: 4608273791120112598}
   - component: {fileID: 4443310839932456897}
   - component: {fileID: 8072353115734556158}
   - component: {fileID: 5748670476040847465}
@@ -32,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9204667757952017828}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.683, y: -2.37, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
@@ -103,103 +102,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!82 &4608273791120112598
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9204667757952017828}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -7534612355746138259, guid: 00c07371bbbda0240815a100e5459649, type: 2}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &4443310839932456897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,18 +141,6 @@ MonoBehaviour:
   m_dashSpeed: 12
   m_dashDuration: 0.2
   m_dashCooldown: 1.2
-  m_audioSource: {fileID: 4608273791120112598}
-  m_jumpSound: {fileID: 8300000, guid: 0cf2682fa7da53d41804560a922e4755, type: 3}
-  m_dashSound: {fileID: 8300000, guid: c4a9fe9df69f53a40871a02e65097920, type: 3}
-  m_landSound: {fileID: 8300000, guid: d38225c26e7566b4ba8a7904ae87e165, type: 3}
-  m_footstepsSound1: {fileID: 8300000, guid: d03926722245d7b44b775a0aa4ab54f0, type: 3}
-  m_footstepsSound2: {fileID: 8300000, guid: 12c7fd36766279742b3cb52b286421ff, type: 3}
-  weatherAudioSource: {fileID: 0}
-  rainSound: {fileID: 8300000, guid: 67bd6ea76776a0b4b90f3de57e40270d, type: 3}
-  snowSound: {fileID: 0}
-  sunnySound: {fileID: 0}
-  thunderstormSound: {fileID: 0}
-  windySound: {fileID: 0}
 --- !u!212 &5748670476040847465
 SpriteRenderer:
   m_ObjectHideFlags: 0

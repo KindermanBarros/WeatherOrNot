@@ -1459,13 +1459,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab343035223d4820816bca20ab2c8600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 2072026064}
-  tilemapDangersRenderer: {fileID: 774314569}
-  clearColor: {r: 0.31394622, g: 0.8018868, b: 0.38697588, a: 1}
-  rainColor: {r: 0.4, g: 0.6, b: 0.9, a: 1}
-  snowColor: {r: 0.8, g: 0.9, b: 1, a: 1}
-  thunderColor: {r: 0.2, g: 0.2, b: 0.3, a: 1}
-  windyColor: {r: 0.7, g: 0.85, b: 0.9, a: 1}
+  m_tilemap: {fileID: 0}
+  m_tilemapDangersRenderer: {fileID: 0}
+  m_clearColor: {r: 1, g: 1, b: 1, a: 1}
+  m_rainColor: {r: 0.4, g: 0.6, b: 0.9, a: 1}
+  m_snowColor: {r: 0.8, g: 0.9, b: 1, a: 1}
+  m_thunderColor: {r: 0.2, g: 0.2, b: 0.3, a: 1}
+  m_windyColor: {r: 0.7, g: 0.85, b: 0.9, a: 1}
 --- !u!1 &1384069729
 GameObject:
   m_ObjectHideFlags: 0
@@ -9453,7 +9453,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2108401124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 241beb8d790c5114994c285208be5204, type: 3}
+  m_Script: {fileID: 11500000, guid: b087ccc1c31cf5a49876011e9d1ef155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807

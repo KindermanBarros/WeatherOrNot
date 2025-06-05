@@ -1,25 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
-using WeatherOrNot.Utils;
 using WeatherOrNot.Events.Weather;
-
+using WeatherOrNot.Utils;
 
 namespace WeatherOrNot.App.WeatherManager
 {
     public class WeatherVisualController : MonoBehaviour
     {
-        [SerializeField] private Tilemap tilemap;
+        [SerializeField] private Tilemap m_tilemap;
 
-        [Header("Tilemap dos perigos")] [SerializeField]
-        private TilemapRenderer tilemapDangersRenderer;
+        [Header("Danger Tilemap")] [SerializeField]
+        private TilemapRenderer m_tilemapDangersRenderer;
 
-        [Header("Cores por clima")] [SerializeField]
-        private Color clearColor = Color.white;
+        [Header("Colors by Weather")] [SerializeField]
+        private Color m_clearColor = Color.white;
 
-        [SerializeField] private Color rainColor = new Color(0.4f, 0.6f, 0.9f);
-        [SerializeField] private Color snowColor = new Color(0.8f, 0.9f, 1f);
-        [SerializeField] private Color thunderColor = new Color(0.2f, 0.2f, 0.3f);
-        [SerializeField] private Color windyColor = new Color(0.7f, 0.85f, 0.9f);
+        [SerializeField] private Color m_rainColor = new Color(0.4f, 0.6f, 0.9f);
+        [SerializeField] private Color m_snowColor = new Color(0.8f, 0.9f, 1f);
+        [SerializeField] private Color m_thunderColor = new Color(0.2f, 0.2f, 0.3f);
+        [SerializeField] private Color m_windyColor = new Color(0.7f, 0.85f, 0.9f);
 
         private void Awake()
         {
@@ -36,35 +35,36 @@ namespace WeatherOrNot.App.WeatherManager
             SetWeatherVisual(e.WeatherType);
         }
 
-        public void SetWeatherVisual(WeatherTypes weather)
+        private void SetWeatherVisual(WeatherTypes weather)
         {
-            if (tilemap == null)
+            if (m_tilemap == null)
             {
-                Debug.LogError("Tilemap não atribuído.");
                 return;
             }
 
             switch (weather)
             {
                 case WeatherTypes.Clear:
-                    tilemap.color = clearColor;
-                    tilemapDangersRenderer.gameObject.SetActive(true);
+                    m_tilemap.color = m_clearColor;
+                    m_tilemapDangersRenderer.gameObject.SetActive(true);
                     break;
                 case WeatherTypes.Rain:
-                    tilemapDangersRenderer.gameObject.SetActive(true);
-                    tilemap.color = rainColor;
+                    m_tilemapDangersRenderer.gameObject.SetActive(true);
+                    m_tilemap.color = m_rainColor;
                     break;
                 case WeatherTypes.Snow:
-                    tilemap.color = snowColor;
-                    tilemapDangersRenderer.gameObject.SetActive(false);
+                    m_tilemap.color = m_snowColor;
+                    m_tilemapDangersRenderer.gameObject.SetActive(false);
                     break;
                 case WeatherTypes.Thunderstorm:
-                    tilemapDangersRenderer.gameObject.SetActive(true);
-                    tilemap.color = thunderColor;
+                    m_tilemapDangersRenderer.gameObject.SetActive(true);
+                    m_tilemap.color = m_thunderColor;
                     break;
                 case WeatherTypes.Windy:
-                    tilemapDangersRenderer.gameObject.SetActive(true);
-                    tilemap.color = windyColor;
+                    m_tilemapDangersRenderer.gameObject.SetActive(true);
+                    m_tilemap.color = m_windyColor;
+                    break;
+                default:
                     break;
             }
         }

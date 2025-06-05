@@ -349,7 +349,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 1.110223e-16, y: -0.0000000068072525, z: 7.5575685e-25, w: 1}
-  m_LocalPosition: {x: -4, y: -2, z: -10}
+  m_LocalPosition: {x: -4, y: -2.092, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -760,7 +760,7 @@ Transform:
   m_GameObject: {fileID: 678582258}
   serializedVersion: 2
   m_LocalRotation: {x: 1.110223e-16, y: -0.0000000068072525, z: -3.917094e-18, w: 1}
-  m_LocalPosition: {x: -4, y: -2, z: -10}
+  m_LocalPosition: {x: -4, y: -2.092, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1126,7 +1126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1912478597406741257, guid: 565816845da16de4396d4da692ed7f31, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -2.092
       objectReference: {fileID: 0}
     - target: {fileID: 1912478597406741257, guid: 565816845da16de4396d4da692ed7f31, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1159,42 +1159,6 @@ PrefabInstance:
     - target: {fileID: 1912478597406741257, guid: 565816845da16de4396d4da692ed7f31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8072353115734556158, guid: 565816845da16de4396d4da692ed7f31, type: 3}
-      propertyPath: m_wallCheck
-      value: 
-      objectReference: {fileID: 2072026059}
-    - target: {fileID: 8072353115734556158, guid: 565816845da16de4396d4da692ed7f31, type: 3}
-      propertyPath: m_groundCheck
-      value: 
-      objectReference: {fileID: 2072026059}
-    - target: {fileID: 8072353115734556158, guid: 565816845da16de4396d4da692ed7f31, type: 3}
-      propertyPath: m_wallCheckPoint
-      value: 
-      objectReference: {fileID: 1620064313}
-    - target: {fileID: 8072353115734556158, guid: 565816845da16de4396d4da692ed7f31, type: 3}
-      propertyPath: m_footstepInterval
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8072353115734556158, guid: 565816845da16de4396d4da692ed7f31, type: 3}
-      propertyPath: m_groundCheckPoint
-      value: 
-      objectReference: {fileID: 1296242224}
-    - target: {fileID: 8072353115734556158, guid: 565816845da16de4396d4da692ed7f31, type: 3}
-      propertyPath: weatherAudioSource
-      value: 
-      objectReference: {fileID: 1644237455}
-    - target: {fileID: 8072353115734556158, guid: 565816845da16de4396d4da692ed7f31, type: 3}
-      propertyPath: m_groundCheckRadius
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 8072353115734556158, guid: 565816845da16de4396d4da692ed7f31, type: 3}
-      propertyPath: m_wallCheckDistance
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 8072353115734556158, guid: 565816845da16de4396d4da692ed7f31, type: 3}
-      propertyPath: m_groundLayer.m_Bits
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9204667757952017828, guid: 565816845da16de4396d4da692ed7f31, type: 3}
       propertyPath: m_Name
@@ -6338,11 +6302,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!82 &1644237455 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 4608273791120112598, guid: 565816845da16de4396d4da692ed7f31, type: 3}
-  m_PrefabInstance: {fileID: 1138370093}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1644237459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1912478597406741257, guid: 565816845da16de4396d4da692ed7f31, type: 3}

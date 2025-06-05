@@ -6,9 +6,19 @@ using FMODUnity;
 using FMOD.Studio;
 // using Mono.Cecil;
 
-namespace WeatherOrNot.App
+public class AudioManager : MonoBehaviour
 {
-    public class AudioManager : MonoBehaviour
+    private static AudioManager _instance;
+
+    [Header("Audio Groups")] [SerializeField]
+    public AudioMixerGroup MainAudioMixer;
+
+    [SerializeField] public AudioMixerGroup MusicGroup;
+    [SerializeField] public AudioMixerGroup AmbienceGroup;
+    [SerializeField] public AudioMixerGroup FootstepsGroup;
+    [SerializeField] public AudioMixerGroup EventsGroup;
+
+    public void Awake()
     {
         private List<EventInstance> eventInstances;
 
@@ -135,5 +145,16 @@ namespace WeatherOrNot.App
             {
                 SFXSource.PlayOneShot(clip);
             }*/
+    }
+
+    public void PlaySfx(AudioClip clip, AudioMixerGroup group, float volume = 1f)
+    {
+        var sfxObj = new GameObject("SFX_" + clip.name);
+        var source = sfxObj.AddComponent<AudioSource>();
+        source.outputAudioMixerGroup = group;
+        source.clip = clip;
+        source.volume = volume;
+        source.Play();
+        Destroy(sfxObj, clip.length + 0.1f);
     }
 }

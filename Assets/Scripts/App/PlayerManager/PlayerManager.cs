@@ -47,6 +47,8 @@ namespace WeatherOrNot.App.PlayerManager
 
             m_isDead = true;
 
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerDeath, transform.position);
+
             m_playerMovement.enabled = false;
 
             if (TryGetComponent<Rigidbody2D>(out var rb))
@@ -57,7 +59,6 @@ namespace WeatherOrNot.App.PlayerManager
 
             // TODO: Add Death Animation and Effects
             EventBus.Notify(this, new StartDeadEvent());
-
 
             Invoke(nameof(RespawnPlayer), m_respawnDelay);
         }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5323837360495313960
+--- !u!1 &4923522941256925505
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7321776577477640966}
-  - component: {fileID: 6944833311771127482}
-  - component: {fileID: 619876152546934965}
+  - component: {fileID: 8934439842316361628}
+  - component: {fileID: 8549063506498439530}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -18,132 +17,145 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7321776577477640966
+--- !u!4 &8934439842316361628
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5323837360495313960}
+  m_GameObject: {fileID: 4923522941256925505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.53639, y: -1.47055, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 6671319053612550324}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6944833311771127482
+--- !u!114 &8549063506498439530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5323837360495313960}
+  m_GameObject: {fileID: 4923522941256925505}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b087ccc1c31cf5a49876011e9d1ef155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainAudioMixer: {fileID: 0}
-  MusicGroup: {fileID: 0}
-  AmbienceGroup: {fileID: 0}
-  FootstepsGroup: {fileID: 0}
-  EventsGroup: {fileID: 0}
---- !u!82 &619876152546934965
-AudioSource:
+--- !u!1 &5548359574842178655
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5323837360495313960}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6671319053612550324}
+  - component: {fileID: 8416243707949085645}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6671319053612550324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5548359574842178655}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8934439842316361628}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8416243707949085645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5548359574842178655}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -174790851810710093, guid: 00c07371bbbda0240815a100e5459649, type: 2}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8471a2ce4b91071488bc6feb49298767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ambience>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <music>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <playerFootsteps>k__BackingField:
+    Guid:
+      Data1: 2107667234
+      Data2: 1332200972
+      Data3: 1870542770
+      Data4: 2067916575
+    Path: event:/SFX/PlayerFootsteps
+  <playerJump>k__BackingField:
+    Guid:
+      Data1: -487279109
+      Data2: 1149205355
+      Data3: 604690086
+      Data4: 489159996
+    Path: event:/SFX/PlayerJump
+  <playerLand>k__BackingField:
+    Guid:
+      Data1: -79774735
+      Data2: 1338119909
+      Data3: 1673250708
+      Data4: -1658719059
+    Path: event:/SFX/PlayerLand
+  <playerDeath>k__BackingField:
+    Guid:
+      Data1: -579372361
+      Data2: 1258564890
+      Data3: 23653271
+      Data4: 461366517
+    Path: event:/SFX/PlayerDeath
+  <orbCollected>k__BackingField:
+    Guid:
+      Data1: 698574156
+      Data2: 1110646906
+      Data3: -427988350
+      Data4: -260941173
+    Path: event:/SFX/OrbsCollected
+  <orbActivation>k__BackingField:
+    Guid:
+      Data1: 565767096
+      Data2: 1273064859
+      Data3: -895663715
+      Data4: 268023725
+    Path: event:/SFX/OrbActivation
+  <confirmButton>k__BackingField:
+    Guid:
+      Data1: 654298179
+      Data2: 1189566457
+      Data3: 223822260
+      Data4: 1087262613
+    Path: event:/UI/ConfirmButton
+  <cancelButton>k__BackingField:
+    Guid:
+      Data1: 951044419
+      Data2: 1243723399
+      Data3: 721620908
+      Data4: -1186035444
+    Path: event:/UI/CancelButton

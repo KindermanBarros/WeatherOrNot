@@ -1118,6 +1118,103 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &963388375
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4923522941256925505, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416243707949085645, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: <music>k__BackingField.Path
+      value: event:/Music/ForestMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416243707949085645, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: <ambience>k__BackingField.Path
+      value: event:/Ambience/ForestAmbiences
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416243707949085645, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: <music>k__BackingField.Guid.Data1
+      value: -1360323014
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416243707949085645, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: <music>k__BackingField.Guid.Data2
+      value: 1110145587
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416243707949085645, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: <music>k__BackingField.Guid.Data3
+      value: -525977973
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416243707949085645, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: <music>k__BackingField.Guid.Data4
+      value: -388116293
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416243707949085645, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: <ambience>k__BackingField.Guid.Data1
+      value: -437110925
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416243707949085645, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: <ambience>k__BackingField.Guid.Data2
+      value: 1174630939
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416243707949085645, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: <ambience>k__BackingField.Guid.Data3
+      value: -1183278167
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416243707949085645, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: <ambience>k__BackingField.Guid.Data4
+      value: -564736733
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934439842316361628, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.15135
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934439842316361628, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.91037
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934439842316361628, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934439842316361628, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934439842316361628, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934439842316361628, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934439842316361628, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934439842316361628, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934439842316361628, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934439842316361628, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b6f0ba4e1f7300842b343be8ad97eabe, type: 3}
 --- !u!1001 &1138370093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6318,151 +6415,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1912478597406741257, guid: 565816845da16de4396d4da692ed7f31, type: 3}
   m_PrefabInstance: {fileID: 1138370093}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1832628574
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1832628576}
-  - component: {fileID: 1832628575}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1832628575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1832628574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b087ccc1c31cf5a49876011e9d1ef155, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1832628576
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1832628574}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.53639, y: -1.47055, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 1961155172}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1961155171
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1961155172}
-  - component: {fileID: 1961155173}
-  m_Layer: 0
-  m_Name: FMODEvents
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1961155172
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961155171}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1832628576}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1961155173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961155171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8471a2ce4b91071488bc6feb49298767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <clearAmbience>k__BackingField:
-    Guid:
-      Data1: -437110925
-      Data2: 1174630939
-      Data3: -1183278167
-      Data4: -564736733
-    Path: event:/Ambience/ClearAmbience
-  <rainAmbience>k__BackingField:
-    Guid:
-      Data1: 608824947
-      Data2: 1340872728
-      Data3: 496530306
-      Data4: 1734764249
-    Path: event:/Ambience/RainAmbience
-  <snowAmbience>k__BackingField:
-    Guid:
-      Data1: -1572733125
-      Data2: 1204897024
-      Data3: -527036027
-      Data4: 1521428987
-    Path: event:/Ambience/SnowAmbience
-  <thunderstormAmbience>k__BackingField:
-    Guid:
-      Data1: -831139308
-      Data2: 1153175020
-      Data3: 1809587849
-      Data4: -88851454
-    Path: event:/Ambience/ThunderstormAmbience
-  <windyAmbience>k__BackingField:
-    Guid:
-      Data1: 1412164026
-      Data2: 1178937690
-      Data3: -602536262
-      Data4: -112253346
-    Path: event:/Ambience/WindyAmbience
-  <music>k__BackingField:
-    Guid:
-      Data1: -1360323014
-      Data2: 1110145587
-      Data3: -525977973
-      Data4: -388116293
-    Path: event:/Music/ForestMusic
-  <playerFootsteps>k__BackingField:
-    Guid:
-      Data1: 2107667234
-      Data2: 1332200972
-      Data3: 1870542770
-      Data4: 2067916575
-    Path: event:/SFX/PlayerFootsteps
-  <orbCollected>k__BackingField:
-    Guid:
-      Data1: 698574156
-      Data2: 1110646906
-      Data3: -427988350
-      Data4: -260941173
-    Path: event:/SFX/OrbsCollected
 --- !u!1 &2072026058
 GameObject:
   m_ObjectHideFlags: 0
@@ -19869,7 +19821,7 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 678582261}
   - {fileID: 619394802}
-  - {fileID: 1832628576}
+  - {fileID: 963388375}
   - {fileID: 1296242224}
   - {fileID: 1287158109}
   - {fileID: 1138370093}

@@ -5,6 +5,7 @@ using WeatherOrNot.Events.Animation;
 using WeatherOrNot.Events.Weather;
 using WeatherOrNot.Utils;
 using FMOD.Studio;
+using WeatherOrNot.App;
 
 namespace WeatherOrNot.App.PlayerManager
 {
@@ -44,7 +45,6 @@ namespace WeatherOrNot.App.PlayerManager
 
 
         [Header("Audio Settings")]
-        [SerializeField]
         private EventInstance m_footstepSound;
 
 
@@ -226,6 +226,8 @@ namespace WeatherOrNot.App.PlayerManager
             m_isTouchingWall = false;
             m_isGrounded = false;
 
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerJump, transform.position);
+
             var originalFacing = m_isFacingRight;
             if ((m_wallDirection == -1 && !m_isFacingRight) || (m_wallDirection == 1 && m_isFacingRight))
             {
@@ -258,6 +260,8 @@ namespace WeatherOrNot.App.PlayerManager
             m_rb.linearVelocity = new Vector2(m_rb.linearVelocity.x, m_jumpUpwardSpeed);
             m_lastJumpPressedTime = -1;
 
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerJump, transform.position);
+
             EventBus.Notify(this, new StartJumpingEvent());
         }
 
@@ -287,8 +291,6 @@ namespace WeatherOrNot.App.PlayerManager
             {
                 EventBus.Notify(this, new StartIdleEvent());
             }
-
-            //EventBus.Notify(this, new ChangeWeatherEvent(weather));
         }
 
         private void SetRain()
@@ -434,6 +436,11 @@ namespace WeatherOrNot.App.PlayerManager
                 {
                     if (Time.time - m_lastWallJumpTime > m_groundLockTime)
                     {
+                        if (!m_isGrounded)
+                        {
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerLand, transform.position);
+                        }
+
                         foundGround = true;
                         m_isGrounded = true;
                         m_lastGroundedTime = Time.time;
@@ -467,6 +474,5 @@ namespace WeatherOrNot.App.PlayerManager
                 m_footstepSound.stop(STOP_MODE.ALLOWFADEOUT);
             }
         }
-
     }
 }

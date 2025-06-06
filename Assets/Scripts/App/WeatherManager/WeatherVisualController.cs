@@ -8,6 +8,9 @@ namespace WeatherOrNot.App.WeatherManager
     public class WeatherVisualController : MonoBehaviour
     {
         [SerializeField] private Tilemap m_tilemap;
+        [SerializeField] private Tilemap m_ceilingTilemap;
+
+        [SerializeField] private ParticleSystem m_rain;
 
         [Header("Danger Tilemap")] [SerializeField]
         private TilemapRenderer m_tilemapDangersRenderer;
@@ -46,23 +49,33 @@ namespace WeatherOrNot.App.WeatherManager
             {
                 case WeatherTypes.Clear:
                     m_tilemap.color = m_clearColor;
+                    m_ceilingTilemap.color = m_clearColor;
                     m_tilemapDangersRenderer.gameObject.SetActive(true);
+                    m_rain.gameObject.SetActive(false);
                     break;
                 case WeatherTypes.Rain:
                     m_tilemapDangersRenderer.gameObject.SetActive(true);
                     m_tilemap.color = m_rainColor;
+                    m_ceilingTilemap.color = m_rainColor;
+                    m_rain.gameObject.SetActive(true);
                     break;
                 case WeatherTypes.Snow:
                     m_tilemap.color = m_snowColor;
+                    m_ceilingTilemap.color = m_snowColor;
                     m_tilemapDangersRenderer.gameObject.SetActive(false);
+                    m_rain.gameObject.SetActive(false);
                     break;
                 case WeatherTypes.Thunderstorm:
                     m_tilemapDangersRenderer.gameObject.SetActive(true);
+                    m_rain.gameObject.SetActive(false);
                     m_tilemap.color = m_thunderColor;
+                    m_ceilingTilemap.color = m_thunderColor;
                     break;
                 case WeatherTypes.Windy:
                     m_tilemapDangersRenderer.gameObject.SetActive(true);
+                    m_rain.gameObject.SetActive(false);
                     m_tilemap.color = m_windyColor;
+                    m_ceilingTilemap.color = m_windyColor;
                     break;
                 default:
                     break;

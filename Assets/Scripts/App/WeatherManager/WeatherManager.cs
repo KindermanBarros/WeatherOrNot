@@ -24,10 +24,8 @@ namespace WeatherOrNot.App.WeatherManager
             if (m_currentWeather == weather) return;
 
             m_currentWeather = weather;
-            //TODO: Implement weather changes
             Debug.Log($"Weather changed to: {m_currentWeather}");
             EventBus.Notify(this, new UpdateWeatherEvent(m_currentWeather));
         }
-
     }
 }

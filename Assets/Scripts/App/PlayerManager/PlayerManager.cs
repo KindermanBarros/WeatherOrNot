@@ -56,7 +56,7 @@ namespace WeatherOrNot.App.PlayerManager
             }
 
             // TODO: Add Death Animation and Effects
-            EventBus.Notify(this, new StartDeadEvent());
+            // EventBus.Notify(this, new StartDeadEvent());
 
 
             Invoke(nameof(RespawnPlayer), m_respawnDelay);

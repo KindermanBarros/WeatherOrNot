@@ -54,7 +54,7 @@ namespace WeatherOrNot.App.WeatherManager
                     m_rain.gameObject.SetActive(false);
                     break;
                 case WeatherTypes.Rain:
-                    m_tilemapDangersRenderer.gameObject.SetActive(true);
+                    m_tilemapDangersRenderer.gameObject.SetActive(false);
                     m_tilemap.color = m_rainColor;
                     m_ceilingTilemap.color = m_rainColor;
                     m_rain.gameObject.SetActive(true);
@@ -62,7 +62,7 @@ namespace WeatherOrNot.App.WeatherManager
                 case WeatherTypes.Snow:
                     m_tilemap.color = m_snowColor;
                     m_ceilingTilemap.color = m_snowColor;
-                    m_tilemapDangersRenderer.gameObject.SetActive(false);
+                    m_tilemapDangersRenderer.gameObject.SetActive(true);
                     m_rain.gameObject.SetActive(false);
                     break;
                 case WeatherTypes.Thunderstorm:

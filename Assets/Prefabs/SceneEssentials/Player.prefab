@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1912478597406741257}
   - component: {fileID: 6754677771338380339}
   - component: {fileID: 7346461446083487599}
+  - component: {fileID: 4608273791120112598}
   - component: {fileID: 4443310839932456897}
   - component: {fileID: 8072353115734556158}
   - component: {fileID: 5748670476040847465}
@@ -72,8 +73,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0007958412, y: -0.00076266134}
-  m_Size: {x: 0.1546704, y: 0.4188397}
+  m_Offset: {x: -0.000795881, y: 0.013621649}
+  m_Size: {x: 0.2447598, y: 0.61722726}
   m_Direction: 0
 --- !u!50 &7346461446083487599
 Rigidbody2D:
@@ -185,12 +186,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 999
-  m_Sprite: {fileID: -4654964282214106459, guid: fa2257e03f71af54ebca57474689f4d6, type: 3}
+  m_Sprite: {fileID: 1538439011731430681, guid: d8a0be0f8fc75c242b8607ebe8fa4cb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.37, y: 0.51}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

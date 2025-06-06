@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5748670476040847465}
   - component: {fileID: 5900574464182179129}
   - component: {fileID: 1794909016175572161}
+  - component: {fileID: 1240711147136779209}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -214,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerMovement: {fileID: 8072353115734556158}
   m_dangerTag: Danger
-  m_respawnDelay: 0.5
+  m_respawnDelay: 1.2
 --- !u!114 &8072353115734556158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,3 +342,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5900574464182179129}
+--- !u!114 &1240711147136779209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9204667757952017828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72b2d7b8e74a6c4aaf30bfe778bd237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
